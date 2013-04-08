@@ -1,0 +1,41 @@
+%div#tabs
+  %ul.nav.nav-pills
+    %li
+      - if user_signed_in?
+        %a{:href => '/characters', :class => "tab"} Characters
+    %li.dropdown
+      %a{:href => '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+        Universe
+        %b.caret
+      %ul.dropdown-menu
+        %li
+          %a{:href => '/regions', :class => "tab"} Regions
+    %li.dropdown
+      %a{:href => '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+        Items
+        %b.caret
+      %ul.dropdown-menu
+        %li
+          %a{:href => '/market_groups', :class => "tab"} Market Groups
+    %li.dropdown
+      %a{:href => '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+        Orders
+        %b.caret
+      %ul.dropdown-menu
+        %li
+          %a{:href => '/orders', :class => "tab"} Current Orders
+        %li
+          %a{:href => '/orders/recent', :class => "tab"} Recent Orders
+    - if current_user.try(:admin)
+      %li.dropdown
+        %a{:href => '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+          Admin
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => '/api_logs', :class => "tab"} API Logs
+          %li
+            %a{:href => status_path, :class => "tab"} Status
+    %li
+      %a{:href => '/links', :class => "tab"} Links
+

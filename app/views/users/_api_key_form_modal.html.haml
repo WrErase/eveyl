@@ -1,0 +1,13 @@
+- @api_key ||= ApiKey.new
+.modal-header
+  %button{:type => 'button', :class => 'close', "data-dismiss" => "modal", "aria-hidden" => "true"}x
+  %h3 Add API Key
+= simple_form_for @api_key, url: '/user/api_keys' do |f|
+  .modal-body
+    - if @key_passed == false
+      %div.alert.alert-error EVE Authentication Failed with Key Parameters
+    = f.input :key_id, placeholder: 'Key ID', label: false, as: :string, input_html: { class: 'input-small' }
+    = f.input :vcode, placeholder: 'VCode', label: false, input_html: { class: 'input-xxlarge' }
+  .modal-footer
+    = f.button :submit
+    %a{:href => '#', :class => 'btn', "data-dismiss" => "modal", "aria-hidden" => "true"}Close

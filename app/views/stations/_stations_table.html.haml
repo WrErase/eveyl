@@ -1,0 +1,19 @@
+- cache(expires_in: 30.minutes) do
+  %table.table.table-hover.no-border
+    %thead
+      %tr
+        %th(style="width: 40%") Name
+        %th(style="width: 25%") Corporation
+        %th(style="width: 5%") Player
+        %th(style="width: 10%") RP Effciency
+        %th(style="width: 10%") RP Take
+    %tbody
+      - stations.each do |station|
+        %tr
+          %td= station.name
+          %td= link_to station.corporation_name, corporation_path(station.corporation_id), target: "_blank"
+          %td= station.conquerable ? 'Yes' : 'No'
+          %td= station.reprocess_eff_perc
+          %td= station.reprocess_take_perc
+
+

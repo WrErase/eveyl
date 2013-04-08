@@ -1,0 +1,29 @@
+%h3 Characters
+
+- @accounts.each do |account|
+  %div.well
+    %p Key ID: #{link_to account.key_id, user_path}, Paid Until: #{account.paid_until}, Last Updated: #{account.updated_at}
+    %table.table
+      %thead
+        %tr
+          %th
+          %th
+          %th
+          %th
+      %tbody
+        - account.shown_characters.each do |character|
+          %tr
+            %td
+              %img{:src => "http://image.eveonline.com/Character/#{character.character_id}_64.jpg"}
+              %img{:src => "http://image.eveonline.com/Corporation/#{character.corporation_id}_32.png"}
+            %td
+              %p= link_to character.name, account_character_path(account, character)
+              %p= link_to character.corporation_name, corporation_path(character.corporation)
+              %p Currently Training: #{character.skill_in_training.try(:skill_name) || 'None'}
+
+            %td= number_with_delimiter(character.balance.to_i, :delimiter => ',')
+            %td= link_to 'Assets', character_character_assets_path(character), :class => 'btn'
+            %td= link_to 'Hide', '#', :class => 'btn btn-small btn-inverse'
+
+    - if account.shown_characters.empty?
+      %strong.text-error No Characters Found

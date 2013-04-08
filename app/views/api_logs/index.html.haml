@@ -1,0 +1,26 @@
+%h3 Eve API Logs
+
+%table#api-logs.table
+  %thead
+    %tr
+      %th(style="width: 15%") TS
+      %th(style="width: 5%") Key ID
+      %th(style="width: 10%") Resource
+      %th(style="width: 5%") ID
+      %th(style="width: 10%") Status
+      %th(style="width: 15%") Cached Until
+  %tbody
+    - @api_logs.each do |log|
+      %tr
+        %td= log.ts
+        %td= log.key_id
+        %td= log.resource_name
+        %td= log.resource_id
+        %td
+          -if log.status == 'OK'
+            %span.label.label-success= log.status
+          -else
+            %span.label.label-important= log.status
+
+        %td= log.cached_until
+

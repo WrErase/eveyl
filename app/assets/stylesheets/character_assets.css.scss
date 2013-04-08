@@ -1,0 +1,16 @@
+body.character_assets {
+  .hidden {
+    display: none;
+  }
+  .meta-high {
+    font-weight: bold;
+    color: blue;
+  }
+  .meta-mid {
+    font-weight: bold;
+    color: green;
+  }
+  .meta-low {
+    color: orange;
+  }
+}

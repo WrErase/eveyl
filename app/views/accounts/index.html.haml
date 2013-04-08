@@ -1,0 +1,22 @@
+%h2 Characters
+
+- if @accounts.nil?
+  No Accounts Found!
+
+  Add API Information
+
+- else
+  - @accounts.each do |account|
+    %table{:class => "table table-striped"}
+      %thead
+        %tr
+          %th
+          %th
+          %th
+      %tbody
+        - account.shown_characters.each do |character|
+          %tr
+            %td= link_to character.name, account_character_path(account, character)
+            %td= character.balance
+            %td= link_to 'Assets', character_assets_path(character)
+    %hr

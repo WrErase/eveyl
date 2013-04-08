@@ -1,0 +1,59 @@
+%h2 Recent Orders
+%hr
+
+%ul.nav.nav-tabs
+  %li.active
+    %a{:href => '#sell', "data-toggle" => "tab"}
+      Sell
+  %li
+    %a{:href => "#buy", "data-toggle" => "tab"}
+      Buy
+
+%div.tab-content
+  %div{:class => "tab-pane active", :id => "sell"}
+    %table{:class => "table table-striped table-condensed order-table recent-sell-table"}
+      %thead
+        %tr
+          %th.name-col Item
+          %th.region-col Region
+          %th.station-col Station
+          %th.price-col Price
+          %th.qty-col Qty
+          %th.time-col Issued
+      %tbody
+        - @orders.sell.each do |o|
+          %tr
+            %td
+              - if o.type
+                = link_to o.type_name, type_path(o.type)
+              - else
+                o.item
+            %td #{o.region_name}
+            %td #{o.station_name}
+            %td #{number_with_delimiter(o.price.round(2), :delimiter => ',')}
+            %td #{number_with_delimiter(o.vol_remain, :delimiter => ',')}
+            %td #{o.issued.strftime("%D %T")}
+
+  %div{:class => "tab-pane", :id => "buy"}
+    %table{:class => "table table-striped table-condensed order-table recent-buy-table"}
+      %thead
+        %tr
+          %th.name-col Item
+          %th.region-col Region
+          %th.station-col Station
+          %th.price-col Price
+          %th.qty-col Qty
+          %th.time-col Issued
+      %tbody
+        - @orders.buy.each do |o|
+          %tr
+            %td
+              - if o.type
+                = link_to o.type_name, type_path(o.type)
+              - else
+                o.item
+            %td #{o.region_name}
+            %td #{o.station_name}
+            %td #{number_with_delimiter(o.price.round(2), :delimiter => ',')}
+            %td #{number_with_delimiter(o.vol_remain, :delimiter => ',')}
+            %td #{o.issued.strftime("%D %T")}

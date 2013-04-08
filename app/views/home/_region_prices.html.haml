@@ -1,0 +1,20 @@
+- unless region_stats.blank?
+  %table.table.price-table
+    %thead
+      %tr
+        %th(style="width: 25%")
+        %th(style="width: 15%") The Forge
+        %th(style="width: 15%") Heimatar
+        %th(style="width: 15%") Metropolis
+        %th(style="width: 15%") Domain
+    - region_stats.each do |type, stats|
+      - if stats.first
+        %tr
+          %td= link_to type, search_orders_path(type_id: stats.first.last.type_id, hisec_only: 'on'), method: :post
+          - [10000002, 10000030, 10000042, 10000043].each do |id|
+            %td
+              - if stats[id].try(stat)
+                %a{:href => '#', :rel => 'tooltip', :title => stats[id]['ts']}
+                  = format_price(stats[id].try(stat), true)
+              - else
+                -

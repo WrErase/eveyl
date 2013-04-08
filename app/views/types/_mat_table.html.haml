@@ -1,0 +1,10 @@
+%table.mat-table
+  %tbody
+    - type.materials.each do |m|
+      %tr
+        %td.name #{link_to m.type_name, type_path(m.material_type_id), target: "_blank"}
+        %td.qty #{number_with_delimiter(m.quantity)}
+        %td #{m.type.mkt_value(current_user) ? number_with_delimiter(m.type.mkt_value(current_user)) : '-'}
+        %td
+          - if m.type.mkt_value(current_user)
+            #{format_price(m.type.mkt_value(current_user) * m.quantity)}

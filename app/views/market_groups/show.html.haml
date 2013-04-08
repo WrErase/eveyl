@@ -1,0 +1,28 @@
+%ul.breadcrumb
+  %li
+    %a{href: market_groups_path} Home
+    %span.divider /
+
+  - @group.group_chain.each do |g|
+    - if g == @group.group_chain.last
+      %li.active= g.name
+    - else
+      %li
+        %a{href: market_group_path(g.id)}= g.name
+        %span.divider /
+
+%h5= @group.description
+%hr
+
+- unless @group.stub?
+  - @group.children.each_slice(3) do |child|
+    .row
+      %p.span4= link_to child[0].name, market_group_path(child[0]) if child[0]
+      %p.span4= link_to child[1].name, market_group_path(child[1]) if child[1]
+      %p.span4= link_to child[2].name, market_group_path(child[2]) if child[2]
+- @group.types.each_slice(3) do |type|
+  .row
+    %p.span4= link_to type[0].name, type_path(type[0]) if type[0]
+    %p.span4= link_to type[1].name, type_path(type[1]) if type[1]
+    %p.span4= link_to type[2].name, type_path(type[1]) if type[2]
+

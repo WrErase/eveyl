@@ -1,0 +1,26 @@
+- cache(expires_in: 30.minutes) do
+  %h2= @region.name
+  %p= link_to 'Dotlan - Evemaps', @region.dotlan_url, target: "_blank"
+
+  - @solar_systems.group_by(&:constellation_name).sort.each do |val|
+    %table.table.table-hover.no-border
+      %thead
+        %tr
+          %th(style="width: 10%")= val.first
+          %th(style="width: 20%") Name
+          %th(style="width: 10%") Security
+          %th(style="width: 10%") Class
+          %th(style="width: 20%") Faction/Alliance
+          %th(style="width: 10%") Stations
+      %tbody
+        - val.last.each do |system|
+          %tr
+            %td
+            %td= link_to system.name, region_solar_system_path(@region.id, system.id)
+            %td= number_with_precision(system.security, precision: 2)
+            %td= system.security_class
+            %td= system.owner
+            - if system.stations.count > 0
+              %td= link_to system.stations.count, region_solar_system_stations_path(@region.id, system.id)
+            - else
+              %td 0

@@ -1,0 +1,12 @@
+%div{:class => 'pull-right input-append'}
+  - if character_id
+    %form{:method => 'post', :action => search_character_character_assets_path(character_id) }
+      %input{:id => 'type-input', :name => 'search', :type => 'text', :value => query, :placeholder => 'Item Name', :class => 'span3'}
+      %input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+      %button{:class => 'btn', :type => 'submit'}Search
+  - else
+    %form{:method => 'post', :action => search_character_assets_path }
+      %input{:id => 'type-input', :name => 'search', :type => 'text', :value => query, :placeholder => 'Item Name', :class => 'span3'}
+      %input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+      %button{:class => 'btn', :type => 'submit'}Search
+

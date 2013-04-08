@@ -1,0 +1,82 @@
+%div{:class => 'well character-sheet'}
+  %p{:class => 'pull-left'}
+    %img{:src => "http://image.eveonline.com/Character/#{@character.character_id}_128.jpg", :class => 'character-img'}
+    %div
+      %p{:class => 'name-title'}
+        #{@character.name}
+      %table{:class => 'character-overview'}
+        %thead
+          %tr
+            %th{:class => 'label-col'}
+            %th{:class => 'value-col'}
+        %tbody
+          %tr
+            %td Skill Points
+            %td
+          %tr
+            %td Clone
+            %td #{@character.clone_name} (#{number_with_delimiter(@character.clone_sp)})
+          %tr
+            %td Background
+            %td #{@character.race} - #{@character.bloodline} - #{@character.ancestry}
+          %tr
+            %td Date of Birth
+            %td #{@character.dob}
+          %tr
+            %td Corporation
+            %td #{@character.corporation_name}
+          %tr
+            %td Alliance
+            %td #{@character.alliance_name}
+          %tr
+            %td Balance
+            %td #{number_with_delimiter(@character.balance)}
+
+  %hr
+    %ul{:class => 'nav nav-tabs'}
+      %li
+        %a{:href => '#attrs', "data-toggle" => 'tab'}Attributes
+      %li
+        %a{:href => '#skills', "data-toggle" => 'tab'}Skills
+      %li
+        %a{:href => '#wallet', "data-toggle" => 'tab'}Wallet
+      %li
+        %a{:href => '#mail', "data-toggle" => 'tab'}Mail
+      %li
+        %a{:href => '#notifications', "data-toggle" => 'tab'}Notifications
+
+    %div.tab-content
+      #attrs.tab-pane.active
+        %table.table
+          %thead
+            %tr
+              %th
+              %th
+          %tbody
+            %tr
+              %td Intelligence
+              %td #{@character.intelligence}
+            %tr
+              %td Perception
+              %td #{@character.perception}
+            %tr
+              %td Charisma
+              %td #{@character.charisma}
+            %tr
+              %td Willpower
+              %td #{@character.willpower}
+            %tr
+              %td Memory
+              %td #{@character.memory}
+      %div{:class => 'tab-pane', :id => 'skills'}
+        = render 'character_skills', skills: @skills
+
+      %div{:class => 'tab-pane', :id => 'wallet'}
+        TBD
+
+      %div{:class => 'tab-pane', :id => 'mail'}
+        TBD
+
+      %div{:class => 'tab-pane', :id => 'notifications'}
+        TBD
+

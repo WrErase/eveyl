@@ -1,0 +1,49 @@
+%h2 Assets
+
+= render "search_form", :query => @query, :character_id => @character_id
+
+%hr
+- if @assets.empty?
+  No Assets Found
+- else
+  - @assets.group_by(&:station_name).each do |station, station_assets|
+    %h4 #{station}
+
+    %table{:class => "table table-striped table-condensed assets-table"}
+      %thead
+        %tr
+          %th Name
+          %th Container
+          %th Qty
+          %th Category
+          %th Variant
+          %th Meta
+          %th Value
+          %th Mat %
+      %tbody
+        - station_assets.each do |asset|
+          %tr
+            - if asset.has_parent?
+              %td #{link_to asset.container.type_name, type_path(asset.container.type_id)} - #{link_to asset.type_name, type_path(asset.type_id)}
+              %td= asset.container.type_name
+            - else
+              %td= link_to asset.type_name, type_path(asset.type_id)
+              %td
+            %td #{number_with_delimiter(asset.quantity)}
+            %td #{asset.category_name}
+            %td #{asset.tech_level}
+            %td #{asset.meta_level}
+            %td #{asset.mkt_value(@current_user)}
+            %td
+          - if asset.children
+            - asset.children.each do |subasset|
+              %tr
+                %td #{link_to asset.type_name, type_path(asset.type_id)} - #{link_to subasset.type_name, type_path(subasset.type_id)}
+                %td= asset.type_name
+                %td #{subasset.quantity}
+                %td #{subasset.category_name}
+                %td #{subasset.tech_level}
+                %td #{subasset.meta_level}
+                %td #{subasset.mkt_value(@current_user)}
+                %td
+    %hr

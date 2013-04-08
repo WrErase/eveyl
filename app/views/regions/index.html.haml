@@ -1,0 +1,23 @@
+- cache do
+  %h2 Regions
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+        %th
+        %th
+        %th
+        %th
+    %tbody
+      - @regions.each_slice(5) do |r|
+        %tr
+          %td= link_to r[0].name, region_path(r[0]) if r[0]
+          %td= link_to r[1].name, region_path(r[1]) if r[1]
+          %td= link_to r[2].name, region_path(r[2]) if r[2]
+          %td= link_to r[3].name, region_path(r[3]) if r[3]
+          %td= link_to r[4].name, region_path(r[4]) if r[4]
+
+
+
+
+

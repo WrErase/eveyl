@@ -1,0 +1,20 @@
+%h2 API Key
+%table.table
+  %thead
+    %tr
+      %th
+      %th
+  %tbody
+    %tr
+      %td Key ID
+      %td= @key.key_id
+    %tr
+      %td VCode
+      %td= @key.vcode[0..10] + '...'
+    %tr
+      %td Access Mask
+      %td= @key.access_mask
+    %tr
+      %td Expires
+      %td= @key.expires
+

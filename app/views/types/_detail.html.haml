@@ -1,0 +1,67 @@
+- if type.is_blueprint?
+  = render :partial => "types/blueprint", locals: {type: type}
+- else
+  %div#detail.tab-pane
+    %table.table.table-striped
+      %thead
+        %tr
+          %th(style="width: 15%")
+          %th(style="width: 85%")
+      %tbody
+        %tr
+          %td Description
+          %td #{type.description.to_s.gsub("\n", '<br>').html_safe}
+        %tr
+          %td Volume
+          %td #{type.volume}
+        %tr
+          %td Category
+          %td #{type.category_name}
+        %tr
+          %td Group
+          %td #{type.group_name}
+        %tr
+          %td Market Group
+          %td
+            - if type.market_group
+              #{type.market_group.group_chain.map(&:name).join(' / ')}
+        - if type.tech_level
+          %tr
+            %td Tech / Meta Level
+            %td
+              T#{type.tech_level}
+              -if type.meta_level
+                M#{type.meta_level}
+        - if type.has_blueprint?
+          %tr
+            %td Blueprint
+            %td= link_to type.blueprint_name, type_path(type.blueprint_type_id)
+        - if type.has_materials?
+          %tr
+            %td
+              Materials
+              - if type.portion_size.to_i > 1
+                %p (for #{type.portion_size})
+            %td
+              = render "types/mat_table", type: type
+        - if type.has_materials? && type.mat_value(current_user)
+          %tr
+            %td Material Value
+            %td
+              %strong
+                %a{:href => '#', :rel => 'tooltip', :title => "#{type.value_ts(current_user)}"}
+                  #{type.mat_value(current_user)}
+        %tr
+          %td Estimated Value
+          %td
+            - if type.mkt_value(current_user)
+              %strong
+                %a{:href => '#', :rel => 'tooltip', :title => "#{type.value_ts}"}
+                  #{type.mkt_value(current_user)}
+            - else
+              %em.text-warning Unknown
+
+        - if type.has_materials?
+          %tr
+            %td Material %
+            %td #{type.mat_perc(current_user)}%

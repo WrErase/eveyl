@@ -1,0 +1,14 @@
+table.price-table {
+  td:nth-child(1) {
+    text-align: left;
+  }
+
+  th, td {
+    text-align: right;
+  }
+}
+
+img.type-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+}

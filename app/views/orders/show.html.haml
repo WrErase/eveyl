@@ -1,0 +1,54 @@
+%h3 Order
+
+%table.table
+  %tr
+    %td Item Name
+    %td= link_to @order.type_name, type_path(@order.type_id), target: '_blank'
+  %tr
+    %td Region
+    %td= link_to @order.region_name, region_path(@order.region_id), target: '_blank'
+  %tr
+    %td Solar System
+    %td= link_to @order.solar_system_name, region_solar_system_path(@order.region_id, @order.solar_system_id), target: '_blank'
+  %tr
+    %td Station
+    %td #{@order.station_name} (#{@order.security.round(2)})
+  %tr
+    %td Price
+    %td #{number_with_delimiter(@order.price.round(2), :delimiter => ',')}
+  %tr
+    %td Vol Start
+    %td #{number_with_delimiter(@order.vol_enter, :delimiter => ',')}
+  %tr
+    %td Vol Remain
+    %td #{number_with_delimiter(@order.vol_remain, :delimiter => ',')}
+  %tr
+    %td Issued
+    %td #{@order.issued.utc.strftime("%D %T")}
+  %tr
+    %td Expires
+    %td #{@order.expires.utc.strftime("%D %T")}
+  %tr
+    %td Last Reported
+    %td #{@order.reported_ts.utc.strftime("%D %T")}
+  %tr
+    %td Outlier
+    %td= @order.outlier ? 'Yes' : 'No'
+
+%h4 Logs
+- if @order.logs.nil?
+  %p No Logs Found
+- else
+  %table.table
+    %tr
+      %th Reported
+      %th Price
+      %th Quantity
+      %th Source
+    - @order.logs.order("reported_ts desc").each do |log|
+      %tr
+        %td= log.reported_ts.utc.strftime("%D %T")
+        %td #{number_with_delimiter(log.price.round(2), :delimiter => ',')}
+        %td #{number_with_delimiter(log.vol_remain, :delimiter => ',')}
+        %td #{log.gen_name} #{log.gen_version}
+

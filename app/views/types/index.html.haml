@@ -1,0 +1,10 @@
+%h1 Items
+
+%form{:action => '/orders/search', :method => 'post', :autocomplete => "off"}
+  %input{:type => 'text', :id => 'item-input', :name => 'item_name', :autocomplete => "off"}
+  %input{:type => 'text', :id => 'region-input', :name => 'region_name', :autocomplete => "off"}
+  %input{:type => 'hidden', :id => 'type-id', :name => 'type_id'}
+  %input{:type => 'hidden', :id => 'region-id', :name => 'region_id'}
+
+  %input{:type => 'submit', :value => 'Search', :class => 'btn'}
+

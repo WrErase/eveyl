@@ -1,0 +1,38 @@
+%h3
+  #{@solar_system.name}
+  %small (#{number_with_precision(@solar_system.security, precision: 2)}0)
+
+%p
+  #{@solar_system.constellation_name} /
+  #{link_to @solar_system.region_name, region_path(@solar_system.region_id)}
+
+%ul.nav.nav-tabs
+  %li.active
+    %a{:href => '#stats', "data-toggle" => "tab"}
+      Stats
+  %li
+    %a{:href => '#stations', "data-toggle" => "tab"}
+      Stations
+
+%div.tab-content
+  %div#stats.tab-pane.active
+    %table#solar-system-stats.table.table-condensed.table-hover.no-border
+      %thead
+        %tr
+          %th(style="width: 15%") Time
+          %th(style="width: 10%") Ship Kills
+          %th(style="width: 10%") Pod Kills
+          %th(style="width: 10%") Faction Kills
+          %th(style="width: 10%") Ship Jumps
+      %tbody
+        - @solar_system.solar_system_stats.each do |stat|
+          %tr
+            %td= stat.ts
+            %td= stat.ship_kills
+            %td= stat.pod_kills
+            %td= stat.faction_kills
+            %td= stat.ship_jumps
+
+  %div#stations.tab-pane
+    = render partial: "stations/stations_table", locals: {stations: @solar_system.stations }
+

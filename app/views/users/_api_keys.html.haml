@@ -1,0 +1,20 @@
+- if api_keys.present?
+  %table.table.api-keys
+    %thead
+      %tr
+        %th Key ID
+        %th VCode
+        %th Access Mask
+        %th Expires
+        %th
+    %tbody
+      - api_keys.each do |key|
+        %tr
+          %td= key.key_id
+          %td= key.vcode[0..10] + '...'
+          %td= key.access_mask
+          %td= key.expires
+          %td
+            = link_to 'Delete', user_api_key_path(key), :confirm => "Are you sure?", :method => :delete, :class => "btn btn-small btn-danger"
+- else
+  None

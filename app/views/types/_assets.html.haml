@@ -1,0 +1,19 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Character
+      %th Region
+      %th Location
+      %th Container
+      %th Quantity
+  %tbody
+    - assets.each do |a|
+      %tr
+        %td= a.character.name
+        %td= a.region_name
+        %td= a.station_name || a.system_name
+        %td= a.container.try(:name) || '-'
+        %td #{number_with_delimiter(a.qty, :delimiter => ',')}
+
+%strong.pull-right
+  Total: #{number_with_delimiter(@total, :delimiter => ',')}

@@ -1,0 +1,13 @@
+- skills.keys.sort.each do |name|
+  %p= name
+  %table.table.table-condensed
+    %thead
+      %tr
+        %th(style="width: 40%")
+        %th(style="width: 60%")
+    %tbody
+      - skills[name].sort { |a,b| a.skill_name <=> b.skill_name}.each do |skill|
+        %tr
+          %td= link_to skill.skill_name, type_path(skill.type_id), target: '_blank'
+          %td= skill.level
+

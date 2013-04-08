@@ -1,0 +1,38 @@
+- cache(expires_in: 5.minutes) do
+  %h3 Status
+  %p Last Updated: #{Time.now.utc}
+  %table.table
+    %thead
+      %tr
+        %th
+        %th
+    %tbody
+      %tr
+        %td Registered Users
+        %td= number_with_delimiter @stats.users
+      %tr
+        %td Registered Characters
+        %td= number_with_delimiter @stats.characters
+      %tr
+        %td Orders (Total / Active / Expired)
+        %td #{number_with_delimiter @stats.orders_total} / #{number_with_delimiter @stats.orders_active} / #{number_with_delimiter @stats.orders_expired}
+      %tr
+        %td Recent Orders (Last Day / Last Hour)
+        %td #{number_with_delimiter @stats.orders_day} / #{number_with_delimiter @stats.orders_hour}
+      %tr
+        %td Order Histories (Total / Last Day)
+        %td #{number_with_delimiter @stats.histories_total} / #{number_with_delimiter @stats.histories_day}
+      %tr
+        %td Solar System Stats (Total / Last Day)
+        %td #{number_with_delimiter @stats.system_stats} / #{number_with_delimiter @stats.system_stats_day}
+      %tr
+        %td Alliances
+        %td= number_with_delimiter @stats.alliances
+      %tr
+        %td Corporations
+        %td= number_with_delimiter @stats.corporations
+      %tr
+        %td Stations (Total / Player Owner)
+        %td #{number_with_delimiter @stats.stations} / #{number_with_delimiter @stats.player_stations}
+
+

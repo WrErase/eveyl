@@ -1,0 +1,42 @@
+%h3 User Profile
+
+%table.table
+  %thead
+    %tr
+      %th(style="width: 25%")
+      %th
+  %tbody
+    %tr
+      %td Email:
+      %td= @user.email
+    %tr
+      %td Last Sign In:
+      %td #{@user.last_sign_in_with_ip}
+
+= simple_form_for @user.user_profile, url: '/user/user_profile' do |f|
+  %table.table
+    %thead
+      %tr
+        %th(style="width: 25%")
+        %th
+    %tbody
+      %tr
+        %td Default Region:
+        %td= f.input :default_region, collection: @regions, label: false, wrapper: 'basic', include_blank: false
+      %tr
+        %td Deafult Stat:
+        %td= f.input :default_stat, collection: @order_stats, label: false, wrapper: 'basic', include_blank: false
+  =f.button :submit
+
+%hr
+
+%h4 API Keys
+= render 'api_keys', :api_keys => @user.api_keys
+
+%button.btn.btn-primary{:type => "button", "data-toggle" => "modal", "data-target" => "#api-key-form-modal"} Add Key
+
+- if @api_key && !@api_key.valid?
+  #api-key-form-modal.modal.show
+    = render partial: "api_key/api_key_form_modal", locals: {api_key: @api_key}
+- else
+  #api-key-form-modal.modal.hide.fade

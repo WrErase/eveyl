@@ -1,0 +1,29 @@
+%table.table
+  %thead
+    %tr
+      - type.me_levels.each do |me|
+        %th ME #{me}
+  %tbody
+    %tr
+      - type.me_levels.each do |me|
+        %td
+          %table.table
+            %thead
+              %tr
+                %th
+                %th
+                %th
+                %th
+              %tr
+                %th Material
+                %th Base
+                %th Needed
+                %th Wasted
+            %tbody
+              - type.bill_of_materials(me).materials.each do |m|
+                %tr
+                  %td= link_to m.name, type_path(m.type_id), target: '_blank'
+                  %td= m.base
+                  %td= m.needed
+                  %td= m.wasted
+

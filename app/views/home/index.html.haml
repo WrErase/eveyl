@@ -1,0 +1,20 @@
+%h2 Material Values
+%hr
+
+
+#price-filters{data: {"default-filter" => @default_stat}}
+  %a{href: '#', class: 'btn btn-small', id: 'mid-buy-sell-link'}Mid Buy-Sell
+  %a{href: '#', class: 'btn btn-small', id: 'sim-buy-link'}Sim 5% Buy
+  %a{href: '#', class: 'btn btn-small', id: 'sim-sell-link'}Sim 5% Sell
+  %a{href: '#', class: 'btn btn-small', id: 'weighted-avg-link'}Weighted Mean
+  %a{href: '#', class: 'btn btn-small', id: 'median-link'}Median
+  %a{href: '#', class: 'btn btn-small', id: 'sell-vol-link'}Sell Volume
+  %a{href: '#', class: 'btn btn-small', id: 'buy-vol-link'}Buy Volume
+
+.well
+  - cache(action_suffix: 'stats_table', expires_in: 30.minutes) do
+    .prices_table
+    - OrderStat.all_stats.each do |stat|
+      .region_prices.hide{data: {stat: stat}}
+        = render "region_prices", {region_stats: @minerals,
+                                   stat: stat}

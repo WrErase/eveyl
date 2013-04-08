@@ -1,0 +1,23 @@
+common: &common
+  adapter: postgresql
+  host: localhost
+  port: 5433
+  username: eveyl
+  password: eveyl
+
+development:
+  <<: *common
+  database: eveyl_development
+
+test:
+  <<: *common
+  database: eveyl_test
+
+production:
+  <<: *common
+  database: eveyl
+
+eve_sde_sqlite:
+  adapter: sqlite3
+  database: db/retribution10-sqlite.db
+

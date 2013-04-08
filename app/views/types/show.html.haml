@@ -1,0 +1,11 @@
+%div.header
+  .pull-left
+    %img.type-icon{src: "http://evefiles.capsuleer.de/types/#{@type._id}_64.png"}
+  %h3= @type.name
+  %h5= link_to 'Orders', search_orders_path(type_id: @type.id, hisec_only: 'on'), :method => :post
+
+= render :partial => "types/detail", :locals => { :type => @type }
+
+- if @assets
+  = render :partial => "types/assets", :locals => { :assets => @assets }
+

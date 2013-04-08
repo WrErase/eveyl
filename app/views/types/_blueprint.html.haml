@@ -1,0 +1,70 @@
+%ul.nav.nav-tabs
+  %li.active
+    %a{:href => '#detail', 'data-toggle' => 'tab'}
+      Detail
+  %li
+    %a{:href => '#materials', 'data-toggle' => 'tab'}
+      Materials
+  %li
+    %a{:href => '#build', 'data-toggle' => 'tab'}
+      Build Time
+
+%div.tab-content
+  %div#detail.tab-pane.active
+    .row
+      .span10
+        %div#detail.tab-pane
+          %table.table.table-striped
+            %thead
+              %tr
+                %th(style="width: 50%")
+                %th(style="width: 50%")
+            %tbody
+              %tr
+                %td Group
+                %td #{type.group_name}
+              %tr
+                %td Market Group
+                %td #{type.market_group_chain}
+              %tr
+                %td Product
+                %td= link_to type.product_name, type_path(type.product_id)
+              %tr
+                %td Base Production Time
+                %td= type.production_time
+              %tr
+                %td Base Research Productivity Time
+                %td= type.research_productivity_time
+              %tr
+                %td Base Research Material Time
+                %td= type.research_material_time
+              %tr
+                %td Base Research Copy Time
+                %td= type.research_copy_time
+              %tr
+                %td Base Invention Time
+                %td= type.research_tech_time
+              %tr
+                %td Max runs
+                %td #{type.max_production_limit}
+              %tr
+                %td Waste Factor
+                %td #{type.waste_factor}%
+
+    %table.table
+      %thead
+        %tr
+          %th Skill
+          %th Level
+      %tbody
+        - type.bill_of_materials.skills.each do |m|
+          %tr
+            %td= link_to m.name, type_path(m.type_id), target: '_blank'
+            %td= m.base
+
+  %div#materials.tab-pane
+    .span6
+      = render :partial => "types/bill_of_materials", locals: {type: type}
+
+  %div#build.tab-pane
+    %p=#Build_Time = Production_Time * (1 - ((Productivity_Modifier / Production_Time) * (PL / (1 + PL)))) * (1 - (0.04 * Industry_Skill))

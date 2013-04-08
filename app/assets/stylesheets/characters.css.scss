@@ -1,0 +1,18 @@
+.character-sheet {
+  .character-img {
+    margin-right: 20px;
+  }
+  .name-title {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  table.character-overview {
+    padding-left: 10px;
+    td {
+      padding: 2px;
+    }
+    .label-col {
+      width: 100px;
+    }
+  }
+}

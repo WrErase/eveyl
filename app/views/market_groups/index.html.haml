@@ -1,0 +1,16 @@
+%h3 Market
+
+#accordion2.accordion
+  - @groups.each do |group|
+    .accordion-group
+      %div.accordion-heading
+        %p.market-group-accord
+          %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", :href => "#collapse-#{group.id}"}
+            #{group.name}
+      %div.accordion-body.collapse{id: "collapse-#{group.id}"}
+        .accordion-inner
+          - group.children.each_slice(3) do |child|
+            .row
+              %p.span3= link_to child[0].name, market_group_path(child[0].id) if child[0]
+              %p.span3= link_to child[1].name, market_group_path(child[1].id) if child[1]
+              %p.span3= link_to child[2].name, market_group_path(child[2].id) if child[2]

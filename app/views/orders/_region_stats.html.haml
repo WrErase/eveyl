@@ -1,0 +1,22 @@
+%table.table.region-stats-table.table-hover
+  %thead
+    %tr
+      %th.region-col Region
+      %th.reported-col Timestamp
+      %th Weighted Avg
+      %th Sim 5% Buy
+      %th Sim 5% Sell
+      %th Median
+      %th Buy Vol
+      %th Sell Vol
+  %tbody
+    - region_stats.each do |region_name, stats|
+      %tr
+        %td= region_name #link_to region_name, region_path(stats.region_id), target: '_blank'
+        %td= stats.ts.strftime("%Y-%m-%d %H:%M")
+        %td= format_price(stats.weighted_avg, true) || '-'
+        %td= format_price(stats.sim_buy, true) || '-'
+        %td= format_price(stats.sim_sell, true) || '-'
+        %td= format_price(stats.median, true) || '-'
+        %td= format_price(stats.buy_vol) || '-'
+        %td= format_price(stats.sell_vol) || '-'

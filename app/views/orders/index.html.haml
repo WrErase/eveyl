@@ -1,0 +1,25 @@
+%h1 Order Search
+
+#error.alert.hide
+  %a{:href => '#', :class => 'close', 'data-dismiss' => 'alert'}x
+  %strong
+
+%form{:action => '/orders/search', :id => 'order-search-form', :method => 'post', :class => 'well form-horizontal', :autocomplete => "off"}
+  %div.row
+    %input{:type => 'hidden', :id => 'type-input', :class => 'span4'}
+    %input{:type => 'hidden', :id => 'region-input', :class => 'span4'}
+  %hr
+  %div
+    %label.checkbox
+      %input{:type => 'checkbox', :checked => true, :name => 'hisec_only'} Hisec Only?
+  %input{:type => 'hidden', :id => 'type-id', :name => 'type_id'}
+  %input{:type => 'hidden', :id => 'region-id', :name => 'region_id'}
+
+  %hr
+  %button{:type => 'submit', :class => "btn"}Submit
+
+#loading.hide
+  .progress.progress-striped.active
+    .bar{:style => 'width: 100%;'}
+
+

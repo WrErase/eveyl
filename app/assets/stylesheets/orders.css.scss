@@ -1,0 +1,67 @@
+body.orders {
+  table.dataTable {
+    height: 550px;
+
+    .region-col {
+      width: 100px;
+    }
+    .reported-col {
+      width: 110px;
+      text-align: center;
+    }
+  }
+
+  .sell-table, .buy-table {
+    th {
+      text-align: center;
+    }
+    .expires-col {
+      width: 80px;
+    }
+    .qty-col {
+      padding-right: 5px;
+    }
+    td:nth-child(4) {
+      padding-right: 10px;
+      text-align: right;
+    }
+    .station-col {
+      width: 425px;
+      overflow: hidden;
+    }
+  }
+
+  .recent-buy-table, .recent-sell-table {
+    .name-col {
+      width: 250px;
+    }
+    .station-col {
+      width: 350px;
+    }
+    .time-col {
+      width: 115px;
+    }
+  }
+
+  .region-stats-table {
+    th {
+      text-align: center;
+    }
+    td:nth-child(n+2) {
+      text-align: right;
+    }
+  }
+
+  .history-table {
+    th,td {
+      text-align: center;
+    }
+    td:nth-child(1) {
+      padding-left: 15px;
+      text-align: left;
+    }
+    td:nth-child(n+3) {
+      text-align: right;
+    }
+  }
+}

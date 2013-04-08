@@ -1,0 +1,23 @@
+%div.well.corporation-sheet
+  %p.pull-left
+    %img{:src => "http://image.eveonline.com/Corporation/#{@corporation.corporation_id}_64.png", :class => 'corporation-img'}
+    %div
+      %p.name-title
+        = @corporation.name_with_ticker
+      - if @corporation.alliance_id.to_i > 0
+        %hr
+        %div
+          %img{:src => "http://image.eveonline.com/Alliance/#{@corporation.alliance_id}_32.png", :class => 'alliance-img'}
+          Member of #{@corporation.alliance_name}
+
+    %div.row
+      - if @corporation.url
+        %p
+          = link_to @corporation.url, @corporation.url, target: "_blank"
+      - if @corporation.member_count
+        %p Members: #{@corporation.member_count}
+
+    - if @corporation.description
+      %div.description
+        = @corporation.description.html_safe
+

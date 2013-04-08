@@ -1,0 +1,104 @@
+.header
+  .type-icon.pull-left
+    %img{src: "http://evefiles.capsuleer.de/types/#{@type._id}_32.png"}
+  %h3 #{@type.name}
+
+%hr
+
+%ul.nav.nav-tabs
+  %li.active
+    %a{:href => '#sell', "data-toggle" => "tab"}
+      Sell
+  %li
+    %a{:href => "#buy", "data-toggle" => "tab"}
+      Buy
+  %li
+    %a{:href => "#regions", "data-toggle" => "tab"}
+      Region Stats
+  %li
+    %a{:href => "#history", "data-toggle" => "tab"}
+      History
+  %li
+    %a{:href => "#history-chart", "data-toggle" => "tab"}
+      History Chart
+  %li
+    %a{:href => "#detail", "data-toggle" => "tab"}
+      Item Detail
+
+%div.tab-content
+  %div#sell.tab-pane.active
+    %table{:class => "table table-striped table-condensed table-hover order-table sell-table",
+           "data-type_id" => @type.id, "data-region_id" => @region_id, "data-high_sec" => @high_sec}
+      %thead
+        %tr
+          %th.region-col Region
+          %th.station-col Station Name
+          %th.price-col Price
+          %th.qty-col Qty
+          %th.expires-col Expires
+          %th.reported-col Reported
+          %th
+      %tbody
+        %tr
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+
+  %div#buy.tab-pane
+    %table{:class => "table table-striped table-condensed table-hover order-table buy-table",
+           "data-type_id" => @type.id, "data-region_id" => @region_id, "data-high_sec" => @high_sec}
+      %thead
+        %tr
+          %th.region-col Region
+          %th.station-col Station Name
+          %th.price-col Price
+          %th.qty-col Qty
+          %th.expires-col Expires
+          %th.reported-col Reported
+          %th
+      %tbody
+        %tr
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+
+  %div#regions.tab-pane
+    = render "region_stats", {region_stats: @region_stats}
+
+  %div#history.tab-pane
+    %table{:class => "table table-striped table-condensed history-table table-hover",
+           "data-type_id" => @type.id, "data-region_id" => @region_id, "data-high_sec" => @high_sec}
+      %thead
+        %tr
+          %th{:class => 'region-col'} Region
+          %th Time
+          %th Qty
+          %th Average
+          %th Low
+          %th High
+        %tbody
+          %tr
+            %td
+            %td
+            %td
+            %td
+            %td
+            %td
+
+  %div#history-chart.tab-pane
+    #chart-container{:style => 'height: 450px; width: 700px', 'data-type_name' => @type.name, 'data-type_id' => "#{@type.id}"}
+
+  %div#regions.tab-pane
+
+  %div#detail.tab-pane
+    = render :partial => "types/detail", :locals => { :type => @type }
+
+
