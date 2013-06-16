@@ -19,5 +19,5 @@ production:
 
 eve_sde_sqlite:
   adapter: sqlite3
-  database: db/retribution10-sqlite.db
+  database: db/ody100-sqlite.db
 
