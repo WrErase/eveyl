@@ -146,8 +146,7 @@ def load_types
                            :market_group_id => type.marketGroupID,
                            :chance_of_duplicating => type.chanceOfDuplicating,
                            :tech_level => tech_level,
-                           :meta_level => meta_level,
-                           :icon_id => type.iconID}, :without_protection => true)
+                           :meta_level => meta_level}, :without_protection => true)
 
       print '.'
       puts t.errors unless t.valid?
